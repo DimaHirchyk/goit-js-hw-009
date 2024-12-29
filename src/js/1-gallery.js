@@ -83,7 +83,6 @@ const gallery = document.querySelector('.gallery');
 gallery.innerHTML = imagesGalleryCard;
 
 import SimpleLightbox from 'simplelightbox';
-git;
 
 new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
