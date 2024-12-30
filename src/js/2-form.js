@@ -11,11 +11,10 @@ const fillFormFilds = () => {
       localStorage.getItem('feedback-form-data')
     );
 
-    if (formDataFormLS === null) {
-      return;
-    }
+    if (formDataFormLS === null) return;
+
     formData = formDataFormLS;
-    console.log(formData);
+
     for (const key in formDataFormLS) {
       feedbackFormEl.elements[key].value = formDataFormLS[key];
     }
@@ -43,10 +42,17 @@ const onFormChange = event => {
 
 const onFeedbackFormSubmit = event => {
   event.preventDefault();
+
+  if (Object.values(formData).some(value => !value.trim())) {
+    return alert('Будь ласка, заповніть всі поля форми!');
+  }
+  console.log('Форма відправлена:', formData);
+
   event.currentTarget.reset();
   localStorage.removeItem('feedback-form-data');
+  formData = { email: '', message: '' };
 };
 
-// подія втрати фокусу при змінні данних
-feedbackFormEl.addEventListener('change', onFormChange);
+// подія при змінні данних
+feedbackFormEl.addEventListener('input', onFormChange);
 feedbackFormEl.addEventListener('submit', onFeedbackFormSubmit);
